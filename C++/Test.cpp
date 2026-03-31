@@ -14,38 +14,50 @@ void logoname()
     system("cls");
 }
 
-void signin()
+
+//place holders for the functions
+std::string signin()
 {
-    std::cout << "signin";
+    std::string input;
+    std::cout << "Signin \nUsername: ";
+    std::cin >> input;
+    system("cls");
+    return input;
+}
+    
+std::string login()
+{   
+    std::string input;
+    std::cout << "login \nUsername: ";
+    std::cin >> input;
+    system("cls");
+    return input;    
 }
 
-void login()
-{
-    std::cout << "login"; 
-}
-
-void frontpage()
-{
+std::string logpage()
+{   
+    std::string username;
     char pick;
     std::cout << "1. Sign in \n2. Log in\nType 1/2: ";
     std::cin >> pick;
 
-    if(pick == '1')
+    switch (pick)
     {
-    system("cls");    
-    signin();
-    }
-    else if(pick == '2')
-    {
-    system("cls");
-    login();
+    case '1':
+        return signin();
+    case '2':
+        return login();
+    default:
+        return "Invalid input";
     }
 }
 
 int main()
-{
+{   
+    std::string username;
     logoname();
-    frontpage();
+    username = logpage();
+    std::cout << "Welcome " << username << "!";  
     return 0;
 
 }
