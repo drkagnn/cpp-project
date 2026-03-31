@@ -1,84 +1,53 @@
-
 #include <iostream>
-#include <string>
-#include <cctype> 
+#include <vector>
+#include <conio.h>
+#include <cstdlib>
 
-
-//functions
-double addition(double a, double b){
-    return a+b;
+void logoname()
+{
+    std::cout << "######    ######    ##   ##    ###      ######   ##   ## \n";
+    std::cout << "##   ##   ##   ##   ##  ##    ## ##    ##        ###  ## \n";
+    std::cout << "##   ##   ######    #####    ##   ##   ##  ####  #### ## \n";
+    std::cout << "##   ##   ##  ##    ##  ##   #######   ##   ##   ## #### \n";
+    std::cout << "######    ##   ##   ##   ##  ##   ##    ######   ##  ### \n";
+    _getch();
+    system("cls");
 }
 
-double subtraction(double a, double b){
-    return a-b;
-}
+void login()
+{
 
-double multiplication(double a, double b){
-    return a*b;
-}
-
-double division(double a, double b){
-    if (b == 0) {
-        return 0;
-
-    }else {
-        return a/b;
-    }
 }
 
 
 
-int main() {
-    double a,b;
-    char op;
-    double result;
-    bool exitloop = false;
-    std::string input;
+int main()
+{
+    
+    logoname();
 
-    while(true){
-        
-        
-        std::cout << "input a: ";    
-        std::cin >> a;
-        std::cout << "input b: ";
-        std::cin >> b;
+    
 
 
-        std::cout << "input operation (+ - * /): ";
-        std::cin >> op;
+    //main structure
+    struct id
+    {
+        std::string username;
+        std::string Pwd;
+    };
 
-        switch(op){
 
-            case '+': result = addition(a,b); break;
-            case '-': result = subtraction(a,b); break;
-            case '*': result = multiplication(a,b); break;
-            case '/': result = division(a,b); break;
-            default: std::cout << "Invalid"; break;
-        }
+    static std::vector<id> list;
 
-        std::cout << result << std::endl;
-        while(true){
-            char terminate;
-            std::cout << "play again (Y/N): " << std::endl;
-            std::cin >> terminate;
+    id person;
 
-            if(terminate == 'Y'){
-                break;
+    list.push_back(person);
 
-            }else if(terminate == 'N'){
-                exitloop = true;
-                break; 
-            }else{
 
-            }
 
-        }
-        if (exitloop == true){
-            break;
-        }else{
+ 
 
-        }
-    }
 
-    return 0;
+
+
 }
