@@ -1,4 +1,4 @@
-#include <iostream>
+        #include <iostream>
 #include <vector>
 #include <conio.h>
 #include <cstdlib>
@@ -17,26 +17,41 @@ void logoname()
 }
 
 
+//forward declaration
+std::string logpage(const std::string& input);
+
+
+
+
 //place holders for the functions
-std::string signin()
+void signin()
 {
-    std::string input;
+    std::string name;
+    std::string pwd;
     std::cout << "Signin \nUsername: ";
-    std::cin >> input;
+    std::cin >> name;
+    std::cout << "\nPassword: ";
+    std::cin >> pwd;
+    
+    //write into data
     system("cls");
-    return input;
+    logpage("");
 }
     
 std::string login()
 {   
-    std::string input;
+    
+    std::string name;
+    std::string pwd;
     std::cout << "login \nUsername: ";
-    std::cin >> input;
+    std::cin >> name;
+    std::cout << "\nPassword: ";
+    std::cin >> pwd;
     system("cls");
-    return input;    
+    return name;    
 }
 
-std::string logpage()
+std::string logpage(const std::string& input)
 {   
     std::string username;
     char pick;
@@ -46,7 +61,7 @@ std::string logpage()
     switch (pick)
     {
     case '1':
-        return signin();
+        signin();
     case '2':
         return login();
     default:
@@ -58,7 +73,7 @@ int main()
 {   
     std::string username;
     logoname();
-    username = logpage();
+    username = logpage("");
     std::cout << "Welcome " << username << "!";  
     return 0;
 
