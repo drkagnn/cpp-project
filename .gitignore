@@ -3,6 +3,9 @@
 *.out
 *.o
 *.obj
+*.db
+*.c
+*.h
 build/
 
 # Python
