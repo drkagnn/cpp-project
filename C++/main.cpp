@@ -7,15 +7,12 @@ int main() {
     double I;
     double r;
 
-    float rho = 1.2;
-
     double Area;
     double P_angin;
     double P_listrik;
-    double efisiensi;
 
     char pick;
-    std::cout << "1. Area \n2. daya angin\n3. daya listrik\n4. efesiensi turbin\n(1/2/3/4): ";
+    std::cout << "1. Area \n2. daya angin\n3. daya listrik\n(1/2/3): ";
     std::cin >> pick;
 
     if(pick == '1')
@@ -32,6 +29,8 @@ int main() {
             std::cout << "Error";
         }
     }
+
+
     else if(pick == '2')
     {
         std::cout << "Masukan Area: ";
@@ -43,7 +42,8 @@ int main() {
 
             if(Velositas > 0)   // nested if
             {
-                P_angin = 0.5 * rho * Area * Velositas * Velositas * Velositas;
+                //1.2 <- rho (densitas angin)
+                P_angin = 0.5 * 1.2 * Area * Velositas * Velositas * Velositas;
                 std::cout << P_angin << " Watt";
             }
             else
@@ -56,6 +56,8 @@ int main() {
             std::cout << "Error";
         }
     }
+
+
     else if(pick == '3')
     {
         std::cout << "Masukan Volt: ";
@@ -81,31 +83,8 @@ int main() {
             std::cout << "Error";
         }
     }
-    else if(pick == '4') 
-    {
-        std::cout << "Masukan Daya listrik: ";
-        std::cin >> P_listrik;
 
-        if(P_listrik >= 0)
-        {
-            std::cout << "Masukan Daya angin: ";
-            std::cin >> P_angin;
-
-            if(P_angin > 0)   // nested if
-            {
-                efisiensi = (P_listrik / P_angin) * 100;
-                std::cout << efisiensi << " %";
-            }
-            else
-            {
-                std::cout << "Error";
-            }
-        }
-        else
-        {
-            std::cout << "Error";
-        }
-    }
+    
     else
     {
         std::cout << "Error";
