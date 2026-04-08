@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <limits>
 #include <map>
+#include <algorithm>
 
 
 //g++ untitled-1.cpp -o main
@@ -14,7 +15,7 @@ int mean(std::vector<int> data){
     }
     int mean = sum / len;
 
-    return mean
+    return mean;
     
 }
 
@@ -37,25 +38,27 @@ int mode(std::vector<int> data){
         }
     }
 
-    return mode, maxCount;
+    return mode;
 }
 
 int median(std::vector<int> data){
-
+        int len = data.size();
+        std::sort(data.begin(), data.end());
     
-    return 0;
+        if (len % 2 == 0) {
+            return (data[len / 2 - 1] + data[len / 2]) / 2;
+        } else {
+            return data[len / 2];
+        }           
 }
 
-
-
-
-
-void s_cal(std::string username) {
+std::vector<int> getdata() {
 
     int i;
     std::vector<int> data;
 
     while (true) {
+        system("cls");
         std::cout << "Input your data (type 0 to exit): ";
 
         //!(std::cin >> i)  output t/f
@@ -72,39 +75,83 @@ void s_cal(std::string username) {
             for(int x : data){
                 std::cout << x << " ";
             }
+            std::cout << "\n";
             break;
         } else {
         data.push_back(i);
         system("cls");
         }
     }
+    return data;
+}
 
-    /*
+void ungroupstatistic(std::string username) {
+    
+    std::vector<int> data = getdata();
+
     std::cout << "What do you want to do " << username << "?";
-    std::cout << "1. mean median modus \n2.";
+    std::cout << "\n------------------------\n1. mean median modus \n2. exit\n(1/2): ";
 
     char pick;
 
-    switch (pick)
-    {
-    case '1':
-    
-        break;
-    
-    default:
-        std::cout << "Invalid";
-        break;
+    bool run2 = true;
+    while(run2 == true) {  
+        
+        
+        std::cin >> pick;
+        
+        switch (pick) {
+        case '1':
+            system("cls");
+            std::cout << "\n------------------------\n";
+            std::cout << "Mean: " << mean(data) << "\n";
+            std::cout << "Median: " << median(data) << "\n";
+            std::cout << "Mode: " << mode(data) << "\n";
+            std::cout << "-------------------------\n";
+            std::cout << "1. mean median modus \n2. exit\n(1/2): ";
+            break;
+        
+        case '2':
+            run2 = false;
+            system("cls");
+            std::cout << "Program closed \n";
+            break;
 
-        */
+        case '3':
+            run2 = false;
+            system("cls");
+            std::cout << "Program closed \n";
+            break;
+        default:
+            std::cout << "Invalid";
+            break;
+
+        }
+    }
 }
+
+void groupedstatistic() {
+
+}
+
+
+void statistic(std::string username) {
     
+    bool run1 = true;
+    while(run1) {
 
 
+
+
+    }
+
+
+}
 
 int main() {
 
     std::vector<int> test = {1,2,3,4,5};
-    mean(test);
+    statistic("user");
     return 0;
     
 }
