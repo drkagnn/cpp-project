@@ -59,7 +59,7 @@ std::vector<int> getdata() {
 
     while (true) {
         system("cls");
-        std::cout << "Input your data (type 0 to exit): ";
+        std::cout << "Input your data (type 0 to finish): ";
 
         //!(std::cin >> i)  output t/f
 
@@ -85,7 +85,7 @@ std::vector<int> getdata() {
     return data;
 }
 
-void ungroupstatistic(std::string username) {
+void ungroupedstatistic(std::string username) {
     
     std::vector<int> data = getdata();
 
@@ -94,8 +94,8 @@ void ungroupstatistic(std::string username) {
 
     char pick;
 
-    bool run2 = true;
-    while(run2 == true) {  
+    bool run = true;
+    while(run == true) {  
         
         
         std::cin >> pick;
@@ -112,13 +112,13 @@ void ungroupstatistic(std::string username) {
             break;
         
         case '2':
-            run2 = false;
+            run = false;
             system("cls");
             std::cout << "Program closed \n";
             break;
 
         case '3':
-            run2 = false;
+            run = false;
             system("cls");
             std::cout << "Program closed \n";
             break;
@@ -130,16 +130,35 @@ void ungroupstatistic(std::string username) {
     }
 }
 
-void groupedstatistic() {
+void groupedstatistic(std::string username) {
 
 }
 
 
 void statistic(std::string username) {
     
-    bool run1 = true;
-    while(run1) {
+    char pick;
 
+
+    bool run = true;
+    while(run) {
+        std::cout << "\n------------------------\n1. Ungrouped Statistic \n2. Grouped Statistic\n(1/2): ";
+
+        std::cin >> pick;
+
+        switch (pick) {
+        case '1':
+            ungroupedstatistic(username);
+            break;
+        case '2':
+            groupedstatistic(username);
+            break;
+        case '0':
+            run = false;
+            break;
+        default:
+            break;
+        }
 
 
 
