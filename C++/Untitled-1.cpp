@@ -139,8 +139,28 @@ void statistic(std::string username) {
     
     bool run1 = true;
     while(run1) {
+        std::cout << "What type of data do you have " << username << "?";
+        std::cout << "\n------------------------\n1. Ungrouped data \n2. Grouped data \n3. Exit\n(1/2/3): ";
 
+        char pick;
 
+        std::cin >> pick;
+        
+        switch (pick) {
+        case '1':
+            system("cls");
+            ungroupstatistic(username);
+            break;
+        
+        case '2':
+            system("cls");
+            groupedstatistic();
+            break;
+        default:
+            system("cls");
+            std::cout << "Invalid input! Please choose 1, 2, or 3.\n";
+            break;
+        }
 
 
     }
