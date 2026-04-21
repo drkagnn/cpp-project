@@ -59,7 +59,7 @@ std::vector<int> getdata() {
 
     while (true) {
         system("cls");
-        std::cout << "Input your data (type 0 to exit): ";
+        std::cout << "Input your data (type 0 to finish): ";
 
         //!(std::cin >> i)  output t/f
 
@@ -85,7 +85,7 @@ std::vector<int> getdata() {
     return data;
 }
 
-void ungroupstatistic(std::string username) {
+void ungroupedstatistic(std::string username) {
     
     std::vector<int> data = getdata();
 
@@ -94,8 +94,8 @@ void ungroupstatistic(std::string username) {
 
     char pick;
 
-    bool run2 = true;
-    while(run2 == true) {  
+    bool run = true;
+    while(run == true) {  
         
         
         std::cin >> pick;
@@ -112,13 +112,13 @@ void ungroupstatistic(std::string username) {
             break;
         
         case '2':
-            run2 = false;
+            run = false;
             system("cls");
             std::cout << "Program closed \n";
             break;
 
         case '3':
-            run2 = false;
+            run = false;
             system("cls");
             std::cout << "Program closed \n";
             break;
@@ -130,17 +130,17 @@ void ungroupstatistic(std::string username) {
     }
 }
 
-void groupedstatistic() {
+void groupedstatistic(std::string username) {
 
 }
 
 
 void statistic(std::string username) {
     
-    bool run1 = true;
-    while(run1) {
+    bool run = true;
+    while(run) {
         std::cout << "What type of data do you have " << username << "?";
-        std::cout << "\n------------------------\n1. Ungrouped data \n2. Grouped data \n3. Exit\n(1/2/3): ";
+        std::cout << "\n------------------------\n1. Ungrouped Statistic \n2. Grouped Statistic \n3. Exit\n(1/2/3): ";
 
         char pick;
 
@@ -149,22 +149,24 @@ void statistic(std::string username) {
         switch (pick) {
         case '1':
             system("cls");
-            ungroupstatistic(username);
+            ungroupedstatistic(username);
             break;
         
         case '2':
             system("cls");
-            groupedstatistic();
+            groupedstatistic(username);
+            break;
+        case '3':
+            run = false;
+            system("cls");
+            std::cout << "Program closed \n";
             break;
         default:
             system("cls");
             std::cout << "Invalid input! Please choose 1, 2, or 3.\n";
             break;
         }
-
-
     }
-
 
 }
 
