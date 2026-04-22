@@ -137,33 +137,36 @@ void groupedstatistic(std::string username) {
 
 void statistic(std::string username) {
     
-    char pick;
-
-
     bool run = true;
     while(run) {
-        std::cout << "------------------------\n1. Ungrouped Statistic \n2. Grouped Statistic\n(1/2): ";
+        std::cout << "What type of data do you have " << username << "?";
+        std::cout << "\n------------------------\n1. Ungrouped Statistic \n2. Grouped Statistic \n3. Exit\n(1/2/3): ";
+
+        char pick;
 
         std::cin >> pick;
-
+        
         switch (pick) {
         case '1':
+            system("cls");
             ungroupedstatistic(username);
             break;
+        
         case '2':
+            system("cls");
             groupedstatistic(username);
             break;
-        case '0':
+        case '3':
             run = false;
+            system("cls");
+            std::cout << "Program closed \n";
             break;
         default:
+            system("cls");
+            std::cout << "Invalid input! Please choose 1, 2, or 3.\n";
             break;
         }
-
-
-
     }
-
 
 }
 

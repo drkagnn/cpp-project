@@ -123,6 +123,7 @@ std::string logpage(const std::string& input) {
     }
 }
 
+//statistic calculator
 
 //g++ untitled-1.cpp -o main
 int mean(std::vector<int> data){
@@ -136,6 +137,7 @@ int mean(std::vector<int> data){
     return mean;
     
 }
+
 int mode(std::vector<int> data){
     std::map<int, int> freq;
 
@@ -157,6 +159,7 @@ int mode(std::vector<int> data){
 
     return mode;
 }
+
 int median(std::vector<int> data){
         int len = data.size();
         std::sort(data.begin(), data.end());
@@ -167,6 +170,7 @@ int median(std::vector<int> data){
             return data[len / 2];
         }           
 }
+
 std::vector<int> getdata() {
 
     int i;
@@ -174,7 +178,7 @@ std::vector<int> getdata() {
 
     while (true) {
         system("cls");
-        std::cout << "Input your data (type 0 to finish): ";
+        std::cout << "Input your data (type 0 to exit): ";
 
         //!(std::cin >> i)  output t/f
 
@@ -200,7 +204,7 @@ std::vector<int> getdata() {
     return data;
 }
 
-void ungroupedstatistic(std::string username) {
+void ungroupstatistic(std::string username) {
     
     std::vector<int> data = getdata();
 
@@ -209,8 +213,8 @@ void ungroupedstatistic(std::string username) {
 
     char pick;
 
-    bool run = true;
-    while(run == true) {  
+    bool run2 = true;
+    while(run2 == true) {  
         
         
         std::cin >> pick;
@@ -227,13 +231,13 @@ void ungroupedstatistic(std::string username) {
             break;
         
         case '2':
-            run = false;
+            run2 = false;
             system("cls");
             std::cout << "Program closed \n";
             break;
 
         case '3':
-            run = false;
+            run2 = false;
             system("cls");
             std::cout << "Program closed \n";
             break;
@@ -244,36 +248,44 @@ void ungroupedstatistic(std::string username) {
         }
     }
 }
-void groupedstatistic(std::string username) {
+
+void groupedstatistic() {
+
 }
+
 
 void statistic(std::string username) {
     
-    char pick;
+    bool run1 = true;
+    while(run1) {
+        std::cout << "What type of data do you have " << username << "?";
+        std::cout << "\n------------------------\n1. Ungrouped data \n2. Grouped data \n3. Exit\n(1/2/3): ";
 
-    bool run = true;
-    while(run) {
-        std::cout << "------------------------\n1. Ungrouped Statistic \n2. Grouped Statistic\n(1/2): ";
+        char pick;
 
         std::cin >> pick;
-
+        
         switch (pick) {
         case '1':
-            ungroupedstatistic(username);
+            system("cls");
+            ungroupstatistic(username);
             break;
+        
         case '2':
-            groupedstatistic(username);
-            break;
-        case '0':
-            run = false;
+            system("cls");
+            groupedstatistic();
             break;
         default:
+            system("cls");
+            std::cout << "Invalid input! Please choose 1, 2, or 3.\n";
             break;
         }
+
+
     }
+
+
 }
-
-
 
 
 int main()
@@ -288,7 +300,7 @@ int main()
     std::cout << "What would you like to do?";
     
 
-
+    int statpick;
     bool run = true;
     while(run == true) {
         std::cout << "\n1. Statistic Calculator\n2. Exit\n(1/2): ";
@@ -296,7 +308,22 @@ int main()
         switch (pick) {
         case '1':
             system("cls");
-            statistic(username);
+            std::cout << "\n1. Statistic Calculator\n2. Exit\n(1/2): ";
+            std::cin >> statpick;
+            if (statpick == 1)
+            {
+                system("cls");
+                statistic(username);
+            } else if (statpick == 2) {
+                run = false;
+                system("cls");
+                std::cout << "Program closed \n";
+            } else {
+                system("cls");
+                std::cout << "Invalid input! Please choose 1 or 2.\n";
+                std::cout << "\n1. Statistic Calculator\n2. Exit\n(1/2): ";
+            }
+            
             break;
         
         case '2':
