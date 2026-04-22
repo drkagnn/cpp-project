@@ -171,42 +171,77 @@ int median(std::vector<int> data){
         }           
 }
 
-std::vector<int> getdata() {
 
-    int i;
-    std::vector<int> data;
+namespace getdata {
 
-    while (true) {
-        system("cls");
-        std::cout << "Input your data (type 0 to exit): ";
+    std::vector<int> ugr() {
 
-        //!(std::cin >> i)  output t/f
+        int i;
+        std::vector<int> data;
 
-        if(!(std::cin >> i)) {
+        while (true) {
             system("cls");
-            std::cout << "Invalid input! Enter a number.\n";
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Input your data (type 0 to exit): ";
 
-        } else if (i == 0) {
+            //!(std::cin >> i)  output t/f
+
+            if(!(std::cin >> i)) {
+                system("cls");
+                std::cout << "Invalid input! Enter a number.\n";
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            } else if (i == 0) {
+                system("cls");
+                std::cout << "Done inputing data.\nThe data is: ";
+                for(int x : data){
+                    std::cout << x << " ";
+                }
+                std::cout << "\n";
+                break;
+            } else {
+            data.push_back(i);
             system("cls");
-            std::cout << "Done inputing data.\nThe data is: ";
-            for(int x : data){
-                std::cout << x << " ";
             }
-            std::cout << "\n";
-            break;
-        } else {
-        data.push_back(i);
-        system("cls");
         }
+        return data;
     }
-    return data;
+
+    std::map<int,int> gr() {
+        int index, frequency;
+        std::map<int,int> data;
+
+
+
+        while (true)
+        {
+            std::cout << "input index (0,0 to exit): ";
+            std::cin >> index;
+            std::cout << "input frequency (0,0 to exit): ";
+            std::cin >> frequency;
+
+            if(index == 0 && frequency == 0){
+                break;
+            }
+
+
+            /* code */
+        }
+        
+        system("cls");
+
+
+
+    }
+
 }
+
+
+
 
 void ungroupstatistic(std::string username) {
     
-    std::vector<int> data = getdata();
+    std::vector<int> data = getdata::ugr();
 
     std::cout << "What do you want to do " << username << "?";
     std::cout << "\n------------------------\n1. mean median modus \n2. exit\n(1/2): ";
@@ -250,6 +285,9 @@ void ungroupstatistic(std::string username) {
 }
 
 void groupedstatistic() {
+    std::map<int,int> data = getdata::gr();
+
+
 
 }
 
@@ -280,11 +318,7 @@ void statistic(std::string username) {
             std::cout << "Invalid input! Please choose 1, 2, or 3.\n";
             break;
         }
-
-
     }
-
-
 }
 
 
@@ -299,12 +333,12 @@ int main()
     
     std::cout << "What would you like to do?";
     
-
+    std::cin >> pick;
     int statpick;
     bool run = true;
     while(run == true) {
         std::cout << "\n1. Statistic Calculator\n2. Exit\n(1/2): ";
-        std::cin >> pick;
+        
         switch (pick) {
         case '1':
             system("cls");
@@ -338,10 +372,7 @@ int main()
             break;
         }
     }
-
-
     return 0;
-
 }
 
 

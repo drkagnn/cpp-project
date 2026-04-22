@@ -170,10 +170,38 @@ void statistic(std::string username) {
 
 }
 
+
+ std::map<int,int> gr() {
+        int index, frequency;
+        std::map<int,int> data;
+
+
+
+        while (true)
+        {
+            std::cout << "input index (0,0 to exit): ";
+            std::cin >> index;
+            std::cout << "input frequency (0,0 to exit): ";
+            std::cin >> frequency;
+
+            if(index == 0 && frequency == 0){
+                break;
+            }
+
+
+            
+
+        }
+        
+        system("cls");
+
+        return data;
+
+}
+
 int main() {
 
-    std::vector<int> test = {1,2,3,4,5};
-    statistic("user");
-    return 0;
+   gr();
+   return 0;
     
-}
+}s
