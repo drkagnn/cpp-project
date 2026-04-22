@@ -142,7 +142,7 @@ void statistic(std::string username) {
 
     bool run = true;
     while(run) {
-        std::cout << "\n------------------------\n1. Ungrouped Statistic \n2. Grouped Statistic\n(1/2): ";
+        std::cout << "------------------------\n1. Ungrouped Statistic \n2. Grouped Statistic\n(1/2): ";
 
         std::cin >> pick;
 
