@@ -126,50 +126,60 @@ std::string logpage(const std::string& input) {
 //statistic calculator
 
 //g++ untitled-1.cpp -o main
-int mean(std::vector<int> data){
-    int len = data.size();
-    int sum;   
-    for(int x : data){  
-        sum = sum + x;
-    }
-    int mean = sum / len;
 
-    return mean;
-    
-}
+namespace ugfunctions {
 
-int mode(std::vector<int> data){
-    std::map<int, int> freq;
-
-    // count frequency
-    for (int x : data) {
-        freq[x]++;
-    }
-
-    int mode = data[0];
-    int maxCount = 0;
-
-    // find most frequent
-    for (auto pair : freq) {
-        if (pair.second > maxCount) {
-            maxCount = pair.second;
-            mode = pair.first;
-        }
-    }
-
-    return mode;
-}
-
-int median(std::vector<int> data){
+    int mean(std::vector<int> data){
         int len = data.size();
-        std::sort(data.begin(), data.end());
-    
-        if (len % 2 == 0) {
-            return (data[len / 2 - 1] + data[len / 2]) / 2;
-        } else {
-            return data[len / 2];
-        }           
+        int sum;   
+        for(int x : data){  
+            sum = sum + x;
+        }
+        int mean = sum / len;
+
+        return mean;
+        
+    }
+
+    int mode(std::vector<int> data){
+        std::map<int, int> freq;
+
+        // count frequency
+        for (int x : data) {
+            freq[x]++;
+        }
+
+        int mode = data[0];
+        int maxCount = 0;
+
+        // find most frequent
+        for (auto pair : freq) {
+            if (pair.second > maxCount) {
+                maxCount = pair.second;
+                mode = pair.first;
+            }
+        }
+
+        return mode;
+    }
+
+    int median(std::vector<int> data){
+            int len = data.size();
+            std::sort(data.begin(), data.end());
+        
+            if (len % 2 == 0) {
+                return (data[len / 2 - 1] + data[len / 2]) / 2;
+            } else {
+                return data[len / 2];
+            }           
+    }
 }
+
+namespace gfunctions {
+    
+
+}
+
 
 
 namespace getdata {
@@ -211,8 +221,6 @@ namespace getdata {
         int index, frequency;
         std::map<int,int> data;
 
-
-
         while (true)
         {
             std::cout << "input index (0,0 to exit): ";
@@ -222,22 +230,15 @@ namespace getdata {
 
             if(index == 0 && frequency == 0){
                 break;
+            }else{
+                data.insert({index, frequency});
+                std::cout << index << "," << frequency;
             }
-
-
-            /* code */
         }
-        
         system("cls");
-
-
-
+        return data;
     }
-
 }
-
-
-
 
 void ungroupstatistic(std::string username) {
     
@@ -258,9 +259,9 @@ void ungroupstatistic(std::string username) {
         case '1':
             system("cls");
             std::cout << "\n------------------------\n";
-            std::cout << "Mean: " << mean(data) << "\n";
-            std::cout << "Median: " << median(data) << "\n";
-            std::cout << "Mode: " << mode(data) << "\n";
+            std::cout << "Mean: " << ugfunctions::mean(data) << "\n";
+            std::cout << "Median: " << ugfunctions::median(data) << "\n";
+            std::cout << "Mode: " << ugfunctions::mode(data) << "\n";
             std::cout << "-------------------------\n";
             std::cout << "1. mean median modus \n2. exit\n(1/2): ";
             break;
@@ -287,10 +288,13 @@ void ungroupstatistic(std::string username) {
 void groupedstatistic() {
     std::map<int,int> data = getdata::gr();
 
+    for (auto &[k, v] : data) {
+    std::cout << k << " -> " << v << std::endl;
+    }
 
+    
 
 }
-
 
 void statistic(std::string username) {
     
@@ -313,6 +317,10 @@ void statistic(std::string username) {
             system("cls");
             groupedstatistic();
             break;
+        case '3':
+            system("cls");
+            run1 = false;
+            break;
         default:
             system("cls");
             std::cout << "Invalid input! Please choose 1, 2, or 3.\n";
@@ -320,7 +328,6 @@ void statistic(std::string username) {
         }
     }
 }
-
 
 int main()
 {   
@@ -374,9 +381,6 @@ int main()
     }
     return 0;
 }
-
-
-
 
 
 

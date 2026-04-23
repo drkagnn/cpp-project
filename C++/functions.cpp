@@ -170,12 +170,9 @@ void statistic(std::string username) {
 
 }
 
-
- std::map<int,int> gr() {
+std::map<int,int> gr() {
         int index, frequency;
         std::map<int,int> data;
-
-
 
         while (true)
         {
@@ -186,22 +183,18 @@ void statistic(std::string username) {
 
             if(index == 0 && frequency == 0){
                 break;
+            }else{
+                data.insert({index, frequency});
+                std::cout << index << "," << frequency;
             }
-
-
-            
-
         }
-        
         system("cls");
-
         return data;
-
-}
+    }
 
 int main() {
 
-   gr();
+   std::map<int,int> data = gr();
    return 0;
     
 }
