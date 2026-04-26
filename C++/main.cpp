@@ -7,7 +7,7 @@
 #include <algorithm>
 #include "sqlite3.h"
 
-
+//g++ untitled-1.cpp -o main
 /* to compile use gcc -c sqlite3.c  this will make sqlite3.o */
 /* to compile use g++ main.cpp sqlite3.o -o app.exe */
 // SELECT * FROM users
@@ -16,6 +16,11 @@
 void clear(){
     std::cout << "\033[2J\033[H";
 }
+struct Classinterval{
+    int upper;
+    int lower;
+    int frequency;
+};
 
 
 void logoname() {
@@ -39,7 +44,7 @@ static int callback(void* data, int argc, char** argv, char** colName) {
     return 0;
 }
 
-//place holders for the functions
+//Account.db
 void signin() {
     sqlite3* db;
 
@@ -170,9 +175,20 @@ std::string logpage() {
     }
 }
 
-//statistic calculator
+namespace display {
+    void vector(std::vector<int> data){
+        std::cout << "The data is: ";
+            for(int x : data){
+                std::cout << x << " ";
+            } std::cout << "\n";
+    }
 
-//g++ untitled-1.cpp -o main
+    void vector(std::vector<Classinterval> data){
+        for (const auto& c : data) {
+            std::cout << c.lower << " - " << c.upper << " : " << c.frequency << "\n";
+        }
+    }
+}
 
 char getChoice(const std::string& text) {
     char c;
@@ -183,7 +199,7 @@ char getChoice(const std::string& text) {
 
 namespace ugfunctions {
 
-    int mean(std::vector<int> data){
+    float mean(std::vector<int> data){
         int len = data.size();
         int sum = 0;
         if(len == 0)return 0;
@@ -219,7 +235,7 @@ namespace ugfunctions {
         return mode;
     }
 
-    int median(std::vector<int> data){
+    float median(std::vector<int> data){
             int len = data.size();
             std::sort(data.begin(), data.end());
             if (data.empty()) return 0;
@@ -233,25 +249,28 @@ namespace ugfunctions {
 }
 
 namespace gfunctions {
-
-
-    int mean(std::map<int,int> data){
-    
-        int Sum=0;
-        int freq=0;
-        if(freq == 0) return 0;
-
-        int avg;
-
-        for(const auto &[x_i,f_i] : data){
-            Sum = Sum + x_i * f_i;
-            freq = freq + f_i;
+    float mean(std::vector<Classinterval> data) {
+        
+        int sum = 0;
+        int freq = 0; 
+        int mean;
+        for(const auto& c : data){
+            sum = sum + (((c.upper+c.lower)/2)*c.frequency);
+            freq = freq + c.frequency;
         }
-        avg = Sum / freq;
-        return avg;
+        mean = sum/freq;
 
-
+        return mean;
     }
+
+    float median(std::vector<Classinterval> data) {
+        return 0;
+    }
+
+    float mode(std::vector<Classinterval> data) {
+        return 0;
+    }
+
 
 }
 
@@ -294,7 +313,34 @@ namespace getdata {
         return data;
     }
 
-    std::map<int,int> gr() {
+    std::vector<Classinterval> gr() {
+
+        std::vector<Classinterval> data;        
+        Classinterval temp;
+
+
+        while (true)
+        {
+            std::cout << "Lower bound: (0,0,0 to exit)";
+            std::cin >> temp.lower;
+
+            std::cout << "Upper bound: ";
+            std::cin >> temp.upper;
+
+            std::cout << "Frequency: ";
+            std::cin >> temp.frequency;
+
+            if (temp.lower == 0 && temp.upper == 0 && temp.frequency == 0)
+            break;
+
+
+            data.push_back(temp);
+        }
+        
+        return data;
+    }
+
+    std::map<int,int> mapgr() {
         int index, frequency;
         std::map<int,int> data;
 
@@ -325,8 +371,7 @@ void ungroupstatistic(std::string username) {
     std::cout << "What do you want to do " << username << "?\n";
     char pick;
 
-    bool isLooprunning = true;
-    while(isLooprunning) {  
+    while(true) {  
         
         
         pick = getChoice("\n1. mean median modus \n2. exit\n(1/2): ");
@@ -334,20 +379,16 @@ void ungroupstatistic(std::string username) {
         switch (pick) {
         case '1':
             clear();
-            std::cout << "The data is: ";
-            for(int x : data){
-                std::cout << x << " ";
-            } std::cout << "\n";
+            display::vector(data);
             std::cout << "Mean: " << ugfunctions::mean(data) << "\n";
             std::cout << "Median: " << ugfunctions::median(data) << "\n";
             std::cout << "Mode: " << ugfunctions::mode(data) << "\n";
             break;
         
         case '2':
-            isLooprunning = false;
             clear();
             std::cout << "Exiting...";
-            break;
+            return;
 
         default:
             clear();
@@ -358,19 +399,42 @@ void ungroupstatistic(std::string username) {
     }
 }
 
-void groupedstatistic() {
-    std::map<int,int> data = getdata::gr();
+void groupedstatistic(std::string username) {
+    std::vector<Classinterval> data = getdata::gr();
+    
+    std::cout << "What do you want to do " << username << "?\n";
+    char pick;
 
-    for (const auto &[k, v] : data) {
-    std::cout << k << " -> " << v << std::endl;
+    while(true) {  
+        
+        pick = getChoice("\n1. mean median modus \n2. exit\n(1/2): ");
+        
+        switch (pick) {
+        case '1':
+            clear();
+            display::vector(data);
+            std::cout << "Mean: " << gfunctions::mean(data) << "\n";
+            std::cout << "Median: " << gfunctions::median(data) << "\n";
+            std::cout << "Mode: " << gfunctions::mode(data) << "\n";
+            break;
+        
+        case '2':
+            clear();
+            std::cout << "Exiting...";
+            return;
+
+        default:
+            clear();
+            std::cout << "Invalid input! Please choose 1, 2, or 3.\n";
+            break;
+
+        }
     }
-
 }
 
 void statistic(std::string username) {
     
-    bool isLooprunning = true;
-    while(isLooprunning) {
+    while(true) {
         std::cout << "What type of data do you have " << username << "?";
         char pick = getChoice("\n1. Ungrouped data \n2. Grouped data \n3. Exit\n(1/2/3): ");
         
@@ -382,14 +446,13 @@ void statistic(std::string username) {
         
         case '2':
             clear();
-            groupedstatistic();
+            groupedstatistic(username);
             break;
 
         case '3':
-            isLooprunning = false;
             clear();
             std::cout << "Exiting... \n";
-            break;
+            return;
 
         default:
             clear();
@@ -402,8 +465,7 @@ void statistic(std::string username) {
 void mainmenu(std::string username) {
     std::cout << "What would you like to do?";
     char pick;
-    bool isLooprunning = true;
-    while(isLooprunning) {
+    while(true) {
         pick = getChoice("\n1. Statistic Calculator\n2. Exit\n(1/2): ");
 
         switch (pick) {
@@ -413,10 +475,9 @@ void mainmenu(std::string username) {
             break;
 
         case '2':
-            isLooprunning = false;
             clear();
             std::cout << "Program closed \n";
-            break;
+            return;
 
         default:
             clear();
